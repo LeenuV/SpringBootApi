@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="course")
-public class CourseInformation implements Serializable{
+public class Course implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,19 +32,19 @@ public class CourseInformation implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="class_id",referencedColumnName="class_id")
-	private ClassInformation classID;
+	private Class classID;
 	
 	@ManyToOne
 	@JoinColumn(name="subject_id",referencedColumnName="subject_id")
-	private SubjectInformation subject;
+	private Subject subject;
 	
 	@ManyToOne
 	@JoinColumn(name="teacher_id",referencedColumnName="teacher_id")
-	private TeacherInformation teacher;
+	private Teacher teacher;
 	
 	@ManyToOne
 	@JoinColumn(name="cc_id",referencedColumnName="cc_id")
-	private CCInformation cc;
+	private CC cc;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy",timezone = "IST")
 	@Column(name="Start_Date",columnDefinition="date")
@@ -90,28 +90,28 @@ public class CourseInformation implements Serializable{
 	public void setCreatedByRole(String createdByRole) {
 		this.createdByRole = createdByRole;
 	}
-	public ClassInformation getClassID() {
+	public Class getClassID() {
 		return classID;
 	}
-	public void setClassID(ClassInformation classID) {
+	public void setClassID(Class classID) {
 		this.classID = classID;
 	}
-	public SubjectInformation getSubject() {
+	public Subject getSubject() {
 		return subject;
 	}
-	public void setSubject(SubjectInformation subject) {
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
-	public TeacherInformation getTeacher() {
+	public Teacher getTeacher() {
 		return teacher;
 	}
-	public void setTeacher(TeacherInformation teacher) {
+	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	public CCInformation getCc() {
+	public CC getCc() {
 		return cc;
 	}
-	public void setCc(CCInformation cc) {
+	public void setCc(CC cc) {
 		this.cc = cc;
 	}
 	public Date getStartDate() {

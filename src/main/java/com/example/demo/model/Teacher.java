@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class TeacherInformation implements Serializable{
+public class Teacher implements Serializable{
 	
 	@Id
 	@Column(name="teacher_id")
@@ -51,7 +51,7 @@ public class TeacherInformation implements Serializable{
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="teacher_id",referencedColumnName="user_id")
-	private UserInformation userInformation;
+	private User userInformation;
 	
 	
 	public Integer getSubjectCount() {
@@ -66,10 +66,10 @@ public class TeacherInformation implements Serializable{
 	public void setClassCount(Integer classCount) {
 		this.classCount = classCount;
 	}
-	public UserInformation getUserInformation() {
+	public User getUserInformation() {
 		return userInformation;
 	}
-	public void setUserInformation(UserInformation userInformation) {
+	public void setUserInformation(User userInformation) {
 		this.userInformation = userInformation;
 	}
 	public String getPhone() {
@@ -157,7 +157,7 @@ public class TeacherInformation implements Serializable{
 		this.state = state;
 	}
 	
-	public TeacherInformation( Integer id,String name, String phone, String status, Date creationDate) {
+	public Teacher( Integer id,String name, String phone, String status, Date creationDate) {
 		super();
 		this.id=id;
 		this.name = name;
@@ -165,10 +165,10 @@ public class TeacherInformation implements Serializable{
 		this.status = status;
 		this.creationDate = creationDate;
 	}
-	public TeacherInformation() {
+	public Teacher() {
 		super();
 	}
-	public TeacherInformation(Integer id) {
+	public Teacher(Integer id) {
 		super();
 		this.id = id;
 	}

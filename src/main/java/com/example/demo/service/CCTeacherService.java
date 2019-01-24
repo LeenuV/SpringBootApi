@@ -8,13 +8,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.CCInformation;
-import com.example.demo.model.CCTeacherInformation;
-import com.example.demo.model.TeacherInformation;
-import com.example.demo.repository.CCInfoRepository;
-import com.example.demo.repository.CCTeacherRepository;
-import com.example.demo.repository.TeacherInfoRepository;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.model.CC;
+import com.example.demo.model.CCTeacher;
+import com.example.demo.model.Teacher;
+import com.example.demo.repository.CCInfoRepo;
+import com.example.demo.repository.CCTeacherRepo;
+import com.example.demo.repository.TeacherInfoRepo;
+import com.example.demo.repository.UserInfoRepo;
 import com.example.demo.utility.utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -22,28 +22,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CCTeacherService {
 	
 	@Autowired
-	private CCInfoRepository ccRepo;
+	private CCInfoRepo ccRepo;
 	
 	@Autowired
-	private TeacherInfoRepository teacherRepo;
+	private TeacherInfoRepo teacherRepo;
 	
 	@Autowired
-	private UserInfoRepository userInfoRepo;
+	private UserInfoRepo userInfoRepo;
 	
 	@Autowired
-	private CCTeacherRepository ccTeacherRepo;
+	private CCTeacherRepo ccTeacherRepo;
 	
-	public List<CCTeacherInformation> listccTeacher()
+	public List<CCTeacher> listccTeacher()
 	{
 		return ccTeacherRepo.findAll();
 	}
 	
-	public CCTeacherInformation findOne(Integer id)
+	public CCTeacher findOne(Integer id)
 	{
 		return ccTeacherRepo.getOne(id);
 	}
 	
-	public String addCCTeacher(CCTeacherInformation ccTeacherInfo)
+	public String addCCTeacher(CCTeacher ccTeacherInfo)
 	{
 		System.out.println("create");
 		List<String> key = new ArrayList<String>();
@@ -101,7 +101,7 @@ public class CCTeacherService {
 		List<String> key=new ArrayList<String>();
 		List<String> value = new ArrayList<String>();
 		String json="";
-		List<CCTeacherInformation> ccTeacherReq=null;
+		List<CCTeacher> ccTeacherReq=null;
 		try
 		{
 			if(role.equalsIgnoreCase("teacher"))

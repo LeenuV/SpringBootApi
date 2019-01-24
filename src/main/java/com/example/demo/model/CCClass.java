@@ -10,36 +10,44 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class CCSubjectInformation implements Serializable{
+public class CCClass implements Serializable{
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@ManyToOne
-	@JoinColumn(name="subject_id",referencedColumnName="subject_id")
-	private SubjectInformation subject;
+	
 	@ManyToOne
 	@JoinColumn(name="cc_id",referencedColumnName="cc_id")
-	private CCInformation cc;
+	private CC cc;
 	
+	@ManyToOne
+	@JoinColumn(name="class_id",referencedColumnName="class_id")
+	private Class classID;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public SubjectInformation getSubject() {
-		return subject;
-	}
-	public void setSubject(SubjectInformation subject) {
-		this.subject = subject;
-	}
-	public CCInformation getCc() {
+
+	public CC getCc() {
 		return cc;
 	}
-	public void setCc(CCInformation cc) {
+
+	public void setCc(CC cc) {
 		this.cc = cc;
 	}
 
+	public Class getClassID() {
+		return classID;
+	}
+
+	public void setClassID(Class classID) {
+		this.classID = classID;
+	}
 	
 	
+
 }

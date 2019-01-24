@@ -11,21 +11,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.CCInformation;
-import com.example.demo.model.CCTeacherInformation;
-import com.example.demo.model.TeacherInformation;
+import com.example.demo.model.CC;
+import com.example.demo.model.CCTeacher;
+import com.example.demo.model.Teacher;
 
 @Repository
-public interface CCTeacherRepository extends JpaRepository<CCTeacherInformation,Integer>{
+public interface CCTeacherRepo extends JpaRepository<CCTeacher,Integer>{
 	
 	@Query("select count(ct) from CCTeacherInformation ct where ct.teacher =:teacher and ct.cc =:cc")
-	public int getCountByTeacherAndCCId(@Param("teacher") TeacherInformation teacher,@Param("cc") CCInformation cc);
+	public int getCountByTeacherAndCCId(@Param("teacher") Teacher teacher,@Param("cc") CC cc);
 	
 	@Query("select ct from CCTeacherInformation ct where requestByRole='cc' and ct.teacher=:id and ct.requestStatus='false'")
-	public List<CCTeacherInformation> getPendingCase(@Param("id") TeacherInformation id);
+	public List<CCTeacher> getPendingCase(@Param("id") Teacher id);
 	
 	@Query("select ct from CCTeacherInformation ct where requestByRole='teacher' and ct.cc=:id and ct.requestStatus='false'")
-	public List<CCTeacherInformation> getCCPendingCase(@Param("id") CCInformation id);
+	public List<CCTeacher> getCCPendingCase(@Param("id") CC id);
 	
 	
 	@Transactional

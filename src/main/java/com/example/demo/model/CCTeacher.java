@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class CCTeacherInformation implements Serializable{
+public class CCTeacher implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,11 +26,11 @@ public class CCTeacherInformation implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="teacher_id",referencedColumnName="teacher_id")
-	private TeacherInformation teacher;
+	private Teacher teacher;
 	
 	@ManyToOne
 	@JoinColumn(name="cc_id",referencedColumnName="cc_id")
-	private CCInformation cc;
+	private CC cc;
 	
 	private String requestByRole;
 	
@@ -50,19 +50,19 @@ public class CCTeacherInformation implements Serializable{
 		this.requestID = requestID;
 	}
 
-	public TeacherInformation getTeacher() {
+	public Teacher getTeacher() {
 		return teacher;
 	}
 
-	public void setTeacher(TeacherInformation teacher) {
+	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
 
-	public CCInformation getCc() {
+	public CC getCc() {
 		return cc;
 	}
 
-	public void setCc(CCInformation cc) {
+	public void setCc(CC cc) {
 		this.cc = cc;
 	}
 
@@ -98,18 +98,18 @@ public class CCTeacherInformation implements Serializable{
 		this.confirmationDate = confirmationDate;
 	}
 
-	public CCTeacherInformation() {
+	public CCTeacher() {
 		super();
 	}
 
-	public CCTeacherInformation(TeacherInformation teacher, CCInformation cc, String requestByRole) {
+	public CCTeacher(Teacher teacher, CC cc, String requestByRole) {
 		super();
 		this.teacher = teacher;
 		this.cc = cc;
 		this.requestByRole = requestByRole;
 	}
 
-	public CCTeacherInformation(Integer requestID, TeacherInformation teacher, CCInformation cc, String requestByRole,
+	public CCTeacher(Integer requestID, Teacher teacher, CC cc, String requestByRole,
 			String requestStatus, Date requestedDate, Date confirmationDate) {
 		super();
 		this.requestID = requestID;
@@ -121,7 +121,7 @@ public class CCTeacherInformation implements Serializable{
 		this.confirmationDate = confirmationDate;
 	}
 
-	public CCTeacherInformation(Integer requestID, TeacherInformation teacher, String requestByRole,
+	public CCTeacher(Integer requestID, Teacher teacher, String requestByRole,
 			String requestStatus, Date requestedDate, Date confirmationDate) {
 		super();
 		this.requestID = requestID;

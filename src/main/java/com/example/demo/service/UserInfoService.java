@@ -6,37 +6,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.CCInformation;
-import com.example.demo.model.StudentInformation;
-import com.example.demo.model.TeacherInformation;
-import com.example.demo.model.UserInformation;
-import com.example.demo.repository.CCInfoRepository;
-import com.example.demo.repository.StudentInfoRepository;
-import com.example.demo.repository.TeacherInfoRepository;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.model.CC;
+import com.example.demo.model.Student;
+import com.example.demo.model.Teacher;
+import com.example.demo.model.User;
+import com.example.demo.repository.CCInfoRepo;
+import com.example.demo.repository.StudentInfoRepo;
+import com.example.demo.repository.TeacherInfoRepo;
+import com.example.demo.repository.UserInfoRepo;
 import com.example.demo.utility.utility;
 
 @Service
 public class UserInfoService {
 	
 	@Autowired
-	private UserInfoRepository userInfoRepo;
+	private UserInfoRepo userInfoRepo;
 	
 	@Autowired
-	private StudentInfoRepository studentInfoRepo;
+	private StudentInfoRepo studentInfoRepo;
 	
 	@Autowired
-	private TeacherInfoRepository teacherInfoRepo;
+	private TeacherInfoRepo teacherInfoRepo;
 	
 	@Autowired
-	private CCInfoRepository ccInfoRepo;
+	private CCInfoRepo ccInfoRepo;
 	
-	public String saveUser(UserInformation userInfo)
+	public String saveUser(User userInfo)
 	{
 		List<String> key=new ArrayList<String>();
 		List<String> value=new ArrayList<String>();
 		try {
-			UserInformation userInfoDB=userInfoRepo.findByRoleAndPhone(userInfo.getPhone(),userInfo.getRole());
+			User userInfoDB=userInfoRepo.findByRoleAndPhone(userInfo.getPhone(),userInfo.getRole());
 			if(userInfoDB!=null && userInfoDB.getId()!=null)
 			{
 				key.add("status");value.add("warning");
@@ -67,12 +67,12 @@ public class UserInfoService {
 		
 	}
 	
-	public String validateOTP(UserInformation userInfo)
+	public String validateOTP(User userInfo)
 	{
 		List<String> key=new ArrayList<String>();
 		List<String> value=new ArrayList<String>();
 		
-		UserInformation userInfoDB=userInfoRepo.findByRoleAndPhone(userInfo.getPhone(), userInfo.getRole());
+		User userInfoDB=userInfoRepo.findByRoleAndPhone(userInfo.getPhone(), userInfo.getRole());
 		try {
 			if(userInfoDB==null)
 			{
@@ -84,17 +84,17 @@ public class UserInfoService {
 				if(userInfoDB.getOtp().equalsIgnoreCase(userInfo.getOtp())) {
 					if(userInfoDB.getRole().equalsIgnoreCase("CC"))
 					{
-						CCInformation ccInfo =new CCInformation(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
+						CC ccInfo =new CC(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
 						ccInfoRepo.save(ccInfo);
 					}
 					else if(userInfoDB.getRole().equalsIgnoreCase("Teacher"))
 					{
-						TeacherInformation teacherInfo =new TeacherInformation(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
+						Teacher teacherInfo =new Teacher(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
 						teacherInfoRepo.save(teacherInfo);
 					}
 					else
 					{
-						StudentInformation studentInfo =new StudentInformation(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
+						Student studentInfo =new Student(userInfoDB.getId(),userInfoDB.getName(),userInfoDB.getPhone(),"True",utility.getTodayDate());
 						studentInfoRepo.save(studentInfo);
 					}
 					key.add("status");value.add("Success");

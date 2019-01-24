@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class SubjectInformation implements Serializable{
+public class Subject implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

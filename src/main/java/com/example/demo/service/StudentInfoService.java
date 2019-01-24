@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.StudentInformation;
-import com.example.demo.model.UserInformation;
-import com.example.demo.repository.StudentInfoRepository;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.model.Student;
+import com.example.demo.model.User;
+import com.example.demo.repository.StudentInfoRepo;
+import com.example.demo.repository.UserInfoRepo;
 import com.example.demo.utility.utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,12 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class StudentInfoService {
 	
 	@Autowired
-	StudentInfoRepository studentInfoRepo;
+	StudentInfoRepo studentInfoRepo;
 	
 	@Autowired
-	UserInfoRepository userInfoRepo;
+	UserInfoRepo userInfoRepo;
 	
-	public String updateStudent(StudentInformation studentInfo)
+	public String updateStudent(Student studentInfo)
 	{
 		List<String> key=new ArrayList<String>();
 		List<String> value=new ArrayList<String>();
@@ -31,9 +31,9 @@ public class StudentInfoService {
 		{
 			if(studentInfoRepo.existsById(studentInfo.getId()))
 			{
-				StudentInformation studentDB=studentInfoRepo.getOne(studentInfo.getId());
+				Student studentDB=studentInfoRepo.getOne(studentInfo.getId());
 				if(!studentDB.getName().equalsIgnoreCase(studentInfo.getName())) {
-					UserInformation userDB=userInfoRepo.getOne(studentDB.getId());
+					User userDB=userInfoRepo.getOne(studentDB.getId());
 					userDB.setName(studentInfo.getName());
 					userInfoRepo.save(userDB);
 				}
@@ -70,7 +70,7 @@ public class StudentInfoService {
 		{
 			if(studentInfoRepo.existsById(studentID))
 			{
-				StudentInformation studentInfo=studentInfoRepo.getOne(studentID);
+				Student studentInfo=studentInfoRepo.getOne(studentID);
 				json=ob.writeValueAsString(studentInfo);
 				key.add("Data");value.add(json);
 			}

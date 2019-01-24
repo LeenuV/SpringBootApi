@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.demo.model.TeacherInformation;
-import com.example.demo.model.UserInformation;
-import com.example.demo.repository.TeacherInfoRepository;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.model.Teacher;
+import com.example.demo.model.User;
+import com.example.demo.repository.TeacherInfoRepo;
+import com.example.demo.repository.UserInfoRepo;
 import com.example.demo.utility.utility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,10 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TeacherInfoService {
 	
 	@Autowired
-	private TeacherInfoRepository teacherInfoRepo;
+	private TeacherInfoRepo teacherInfoRepo;
 	
 	@Autowired
-	private UserInfoRepository userInfoRepo;
+	private UserInfoRepo userInfoRepo;
 	
 	public String getTeacher(Integer teacherID)
 	{
@@ -33,7 +33,7 @@ public class TeacherInfoService {
 		{
 			if(teacherInfoRepo.existsById(teacherID))
 			{
-				TeacherInformation teacherInfo=teacherInfoRepo.getOne(teacherID);
+				Teacher teacherInfo=teacherInfoRepo.getOne(teacherID);
 				json=ob.writeValueAsString(teacherInfo);
 				key.add("data");value.add(json);
 			}
@@ -53,7 +53,7 @@ public class TeacherInfoService {
 		return utility.getResponse(key, value);
 	}
 	
-	public String updateTeacher(@RequestBody TeacherInformation teacherInfo)
+	public String updateTeacher(@RequestBody Teacher teacherInfo)
 	{
 		List<String> key=new ArrayList<String>();
 		List<String>value=new ArrayList<String>();
@@ -61,9 +61,9 @@ public class TeacherInfoService {
 		{
 			if(teacherInfoRepo.existsById(teacherInfo.getId()))
 			{
-				TeacherInformation teacherInfoDB=teacherInfoRepo.getOne(teacherInfo.getId());
+				Teacher teacherInfoDB=teacherInfoRepo.getOne(teacherInfo.getId());
 				if(!teacherInfoDB.getName().equalsIgnoreCase(teacherInfo.getName())) {
-					UserInformation userInfo=userInfoRepo.getOne(teacherInfoDB.getId());
+					User userInfo=userInfoRepo.getOne(teacherInfoDB.getId());
 					userInfo.setName(teacherInfo.getName());
 					userInfoRepo.save(userInfo);
 				}

@@ -6,17 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.CourseInformation;
-import com.example.demo.repository.CourseInfoRepository;
+import com.example.demo.model.Course;
+import com.example.demo.repository.CourseInfoRepo;
 import com.example.demo.utility.utility;
 
 @Service
 public class CourseInfoService {
 	
 	@Autowired
-	private CourseInfoRepository courseInfoRepo;
+	private CourseInfoRepo courseInfoRepo;
 	
-	public String addCourse(CourseInformation courseInfo)
+	public String addCourse(Course courseInfo)
 	{
 		List<String> key=new ArrayList<String>();
 		List<String>value=new ArrayList<String>();

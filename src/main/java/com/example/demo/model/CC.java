@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class CCInformation implements Serializable{
+public class CC implements Serializable{
 	
 	@Id
 	@Column(name="cc_id")
@@ -51,7 +51,7 @@ public class CCInformation implements Serializable{
 		
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="cc_id",referencedColumnName="user_id")
-	private UserInformation userInformation;
+	private User userInformation;
 	
 	public Integer getId() {
 		return id;
@@ -158,13 +158,13 @@ public class CCInformation implements Serializable{
 	
 	
 	
-	public UserInformation getUserInformation() {
+	public User getUserInformation() {
 		return userInformation;
 	}
-	public void setUserInformation(UserInformation userInformation) {
+	public void setUserInformation(User userInformation) {
 		this.userInformation = userInformation;
 	}
-	public CCInformation(Integer id,String name,String phone, String status, Date creationDate) {
+	public CC(Integer id,String name,String phone, String status, Date creationDate) {
 		super();
 		this.id=id;
 		this.name = name;
@@ -172,13 +172,13 @@ public class CCInformation implements Serializable{
 		this.status = status;
 		this.phone = phone;
 	}
-	public CCInformation() {
+	public CC() {
 		super();
 	}
-	public CCInformation(Integer id, String name, String email, Date creationDate, Date modificationDate, String status,
+	public CC(Integer id, String name, String email, Date creationDate, Date modificationDate, String status,
 			String phone, String address1, String address2, String pincode, String city, String state,
 			String picturePath, String description, String videoPath, Integer subjectCount, Integer classCount,
-			UserInformation userInformation) {
+			User userInformation) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -199,7 +199,7 @@ public class CCInformation implements Serializable{
 		this.classCount = classCount;
 		this.userInformation = userInformation;
 	}
-	public CCInformation(Integer id) {
+	public CC(Integer id) {
 		super();
 		this.id = id;
 	}
